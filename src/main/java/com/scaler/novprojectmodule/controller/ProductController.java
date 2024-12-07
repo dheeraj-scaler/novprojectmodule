@@ -1,10 +1,8 @@
 package com.scaler.novprojectmodule.controller;
 
 import com.scaler.novprojectmodule.models.Product;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.scaler.novprojectmodule.service.ProductService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProductController {
@@ -16,6 +14,12 @@ public class ProductController {
     // 3. update a product
     // 4. delete a product
 
+    private ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
     // This will help in creating the product
 //    @RequestMapping(value = "/products", method = RequestMethod.POST)
     @PostMapping("/products")
@@ -24,7 +28,9 @@ public class ProductController {
     }
 
     // This will help in getting the product
-    public Product getProductById(Long id) {
+    @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable("id") Long id) {
+        productService.getSingleProduct(id);
         return null;
     }
 
