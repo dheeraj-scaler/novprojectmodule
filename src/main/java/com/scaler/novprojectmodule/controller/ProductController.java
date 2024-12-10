@@ -23,15 +23,21 @@ public class ProductController {
     // This will help in creating the product
 //    @RequestMapping(value = "/products", method = RequestMethod.POST)
     @PostMapping("/products")
-    public void createProduct(Product product) {
-        
+    public Product createProduct(@RequestBody Product product) {
+        Product p = productService.createProduct(product.getId(),
+                product.getTitle(), product.getDescription(),
+                product.getPrice(), product.getCategory().getTitle());
+        return p;
     }
 
     // This will help in getting the product
     @GetMapping("/products/{id}")
     public Product getProductById(@PathVariable("id") Long id) {
-        productService.getSingleProduct(id);
-        return null;
+        System.out.println("Starting the api here");
+        Product p = productService.getSingleProduct(id);
+        System.out.println("Ending the api here");
+
+        return p;
     }
 
     public void updateProduct(Product product) {

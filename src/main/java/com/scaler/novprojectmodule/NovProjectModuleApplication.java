@@ -12,11 +12,10 @@ public class NovProjectModuleApplication {
     public static void main(String[] args) {
         SpringApplication.run(NovProjectModuleApplication.class, args);
 
-        Product p = new Product();
-        p.setId(12L);
-        System.out.println(p);
+//        Product p = new Product();
+//        p.setId(12L);
+//        System.out.println(p);
 
-        ProductService ps = new FakeStoreProductService();
 
     }
 

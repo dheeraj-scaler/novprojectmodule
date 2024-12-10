@@ -9,5 +9,5 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Product createProduct(Product product);
+    Product createProduct(Long id, String title, String description, Double price, String category);
 }
