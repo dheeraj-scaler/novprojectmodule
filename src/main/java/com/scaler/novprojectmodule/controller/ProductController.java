@@ -4,6 +4,8 @@ import com.scaler.novprojectmodule.dto.ErrorDto;
 import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import com.scaler.novprojectmodule.service.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,12 +36,16 @@ public class ProductController {
 
     // This will help in getting the product
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
         System.out.println("Starting the api here");
         Product p = productService.getSingleProduct(id);
         System.out.println("Ending the api here");
 
-        return p;
+        ResponseEntity<Product> response = new ResponseEntity<>(
+            p, HttpStatus.OK
+        );
+
+        return response;
     }
 
     public void updateProduct(Product product) {
@@ -51,10 +57,14 @@ public class ProductController {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ErrorDto handleProductNotFoundException(Exception e) {
+    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e) {
         ErrorDto errorDto = new ErrorDto();
         errorDto.setMessage(e.getMessage());
 
-        return errorDto;
+
+        ResponseEntity<ErrorDto> response = new ResponseEntity<>(
+                errorDto, HttpStatus.NOT_FOUND
+        );
+        return response;
     }
 }
