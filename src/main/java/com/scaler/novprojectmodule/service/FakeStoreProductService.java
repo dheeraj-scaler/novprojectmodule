@@ -1,6 +1,7 @@
 package com.scaler.novprojectmodule.service;
 
 import com.scaler.novprojectmodule.dto.FakeStoreProductDto;
+import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,14 +18,17 @@ public class FakeStoreProductService implements ProductService{
         this.restTemplate = restTemplate;
     }
 
-    public Product getSingleProduct(long id) {
+    public Product getSingleProduct(long id) throws ProductNotFoundException {
         System.out.println("Inside FK product service");
         FakeStoreProductDto fakeStoreProductDto =
                  restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
                 FakeStoreProductDto.class);
 
-        System.out.println(fakeStoreProductDto.toString());
-//        return null;
+//        System.out.println(fakeStoreProductDto.toString());
+
+        if(fakeStoreProductDto == null) {
+            throw new ProductNotFoundException("Product not found with id "+id);
+        }
         return fakeStoreProductDto.getProduct();
     }
 

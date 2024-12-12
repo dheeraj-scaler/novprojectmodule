@@ -1,5 +1,7 @@
 package com.scaler.novprojectmodule.controller;
 
+import com.scaler.novprojectmodule.dto.ErrorDto;
+import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import com.scaler.novprojectmodule.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +34,7 @@ public class ProductController {
 
     // This will help in getting the product
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
+    public Product getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
         System.out.println("Starting the api here");
         Product p = productService.getSingleProduct(id);
         System.out.println("Ending the api here");
@@ -46,5 +48,13 @@ public class ProductController {
 
     public void deleteProduct(Long id) {
 
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ErrorDto handleProductNotFoundException(Exception e) {
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setMessage(e.getMessage());
+
+        return errorDto;
     }
 }
