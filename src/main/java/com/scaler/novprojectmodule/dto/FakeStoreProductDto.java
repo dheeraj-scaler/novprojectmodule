@@ -2,8 +2,15 @@ package com.scaler.novprojectmodule.dto;
 
 import com.scaler.novprojectmodule.models.Category;
 import com.scaler.novprojectmodule.models.Product;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class FakeStoreProductDto {
     private Long id;
     private String title;
@@ -16,14 +23,14 @@ public class FakeStoreProductDto {
     // the values from fakestore
     public Product getProduct() {
         Product product = new Product();
-        product.setId(id);
-        product.setTitle(title);
-        product.setPrice(price);
-        product.setDescription(description);
-        product.setImageUrl(image);
+        product.setId(this.id);
+        product.setTitle(this.title);
+        product.setPrice(this.price);
+        product.setDescription(this.description);
+        product.setImageUrl(this.image);
 
         Category cat = new Category();
-        cat.setTitle(category);
+        cat.setTitle(this.category);
         product.setCategory(cat);
 
         return product;

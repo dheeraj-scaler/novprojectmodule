@@ -4,6 +4,7 @@ import com.scaler.novprojectmodule.dto.ErrorDto;
 import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import com.scaler.novprojectmodule.service.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -31,6 +32,7 @@ public class ProductController {
         Product p = productService.createProduct(product.getId(),
                 product.getTitle(), product.getDescription(),
                 product.getPrice(), product.getCategory().getTitle());
+
         return p;
     }
 
