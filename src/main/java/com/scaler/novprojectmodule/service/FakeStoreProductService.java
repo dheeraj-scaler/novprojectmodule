@@ -3,6 +3,7 @@ package com.scaler.novprojectmodule.service;
 import com.scaler.novprojectmodule.dto.FakeStoreProductDto;
 import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -49,7 +50,6 @@ public class FakeStoreProductService implements ProductService{
                 "https://fakestoreapi.com/products",
                 fakeStoreProductDto,
                 FakeStoreProductDto.class);
-
         return response.getProduct();
     }
 
