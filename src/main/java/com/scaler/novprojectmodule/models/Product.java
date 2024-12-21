@@ -20,6 +20,8 @@ public class Product extends BaseModel {
     @ManyToOne
     private Category category;
 
+    private int height;
+
     @Override
     public String toString() {
         return "Product{" +
