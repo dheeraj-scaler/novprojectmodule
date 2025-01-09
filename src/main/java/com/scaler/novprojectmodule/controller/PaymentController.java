@@ -20,6 +20,7 @@ public class PaymentController {
 
     @PostMapping("/payments")
     public ResponseEntity<String> createPaymentLink(@RequestBody PaymentRequestDto paymentRequestDto) throws StripeException {
+        // It should get the order details from order service
         String paymentLink  = paymentService.makePayment(paymentRequestDto.getOrderId(), paymentRequestDto.getAmount());
         return new ResponseEntity<>(paymentLink, HttpStatus.OK);
 

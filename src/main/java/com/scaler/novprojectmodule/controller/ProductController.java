@@ -5,9 +5,12 @@ import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import com.scaler.novprojectmodule.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ProductController {
@@ -58,15 +61,16 @@ public class ProductController {
 
     }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setMessage(e.getMessage());
-
-
-        ResponseEntity<ErrorDto> response = new ResponseEntity<>(
-                errorDto, HttpStatus.NOT_FOUND
-        );
-        return response;
+    // pageSize, pageNumber, fieldName, sort Order
+    @GetMapping("/products")
+    public Page<Product> getAllProducts(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize")int pageSize, @RequestParam("fieldName")String fieldName, @RequestParam("searchQuery") String searchQuery) {
+        return productService.getAllProducts(pageNumber,pageSize, fieldName);
     }
+
+
+
+
+
+
+
 }
