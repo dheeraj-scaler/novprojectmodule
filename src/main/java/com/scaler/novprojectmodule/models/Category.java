@@ -43,3 +43,12 @@ public class Category extends BaseModel{
         this.products = products;
     }
 }
+
+
+
+//
+//  1      1
+//  P      C
+//  M       1
+//
+// If I am deleting a category,
