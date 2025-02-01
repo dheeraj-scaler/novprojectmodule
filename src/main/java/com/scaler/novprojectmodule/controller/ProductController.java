@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,7 @@ public class ProductController {
     // 4. delete a product
 
     private ProductService productService;
+    List<Product> products = new ArrayList<>();
 
     public ProductController(@Qualifier("fakeStoreProductService") ProductService productService) {
         this.productService = productService;
