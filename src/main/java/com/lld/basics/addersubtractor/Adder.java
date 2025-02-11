@@ -10,7 +10,9 @@ public class Adder implements Runnable {
     @Override
     public void run() {
         for (int i = 1; i <= 1000000; i += 1) {
+            // lock
             count.value += 1;
+            // unlock
         }
     }
 }
