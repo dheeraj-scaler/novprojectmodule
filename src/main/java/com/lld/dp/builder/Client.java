@@ -9,7 +9,9 @@ public class Client {
          b.setGradYear(2020);
          b.setPhoneNumber("7870745678");
 
-         Student s = new Student(b);
+         //Student s = new Student(b);
+
+        Student s = b.build();
 
     }
 }

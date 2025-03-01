@@ -65,4 +65,9 @@ public class Builder {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Student build() {
+        // cons of student with the attr of builder
+        return new Student(this);
+    }
 }
