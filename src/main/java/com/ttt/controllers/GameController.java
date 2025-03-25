@@ -24,12 +24,12 @@ public class GameController {
         return null;
     }
 
-    public void printGame() {
-
+    public void printGame(Game game) {
+        game.getBoard().printBoard();
     }
 
-    public void makeMove() {
-
+    public void makeMove(Game game) {
+        game.makeMove();
     }
 
     public void undo() {
