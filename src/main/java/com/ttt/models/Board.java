@@ -25,6 +25,7 @@ public class Board {
             for (Cell cell: row) {
                 cell.printCell();
             }
+            System.out.println();
         }
     }
 

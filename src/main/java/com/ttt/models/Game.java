@@ -109,6 +109,26 @@ public class Game {
         // update next player
         nextPlayerMoveIndex += 1;
         nextPlayerMoveIndex %= players.size();
+
+        // you can update the winner
+        if(checkWinner(finalMoveObject)) {
+            // whether a player is winning or not
+            winner = currentPlayer;
+            gameState = GameState.ENDED;
+        } else if(moves.size() == (board.getDimension() * board.getDimension())) {
+            // no valid moves left
+            gameState = GameState.DRAW;
+        }
+
+    }
+
+    public boolean checkWinner(Move move) {
+        for(WinningStrategy winningStrategy: winningStrategies) {
+            if(winningStrategy.checkWinner(board, move)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Builder getBuilder() {

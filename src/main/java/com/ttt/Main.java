@@ -18,7 +18,7 @@ public class Main {
         int dimension = 3;
         List<Player> players = new ArrayList<>();
         players.add(new Player("Tanishq", 1, new Symbol('X'), PlayerType.HUMAN));
-        players.add(new Player("Dheeraj", 2, new Symbol('Y'), PlayerType.HUMAN));
+        players.add(new Bot("Dheeraj", 2, new Symbol('Y'), PlayerType.BOT, BotDifficultyLevel.EASY));
 
         List<WinningStrategy> winningStrategies = new ArrayList<>();
         winningStrategies.add(new RowWinningStrategy());
@@ -35,7 +35,15 @@ public class Main {
             // Print the board
             // Make a move
             // next player change
+            gameController.printGame(game);
+
+            gameController.makeMove(game);
+
         }
+
+        gameController.printGame(game);
+        System.out.println(game.getWinner().getName());
+
 
     }
 }
