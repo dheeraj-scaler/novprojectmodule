@@ -131,6 +131,34 @@ public class Game {
         return false;
     }
 
+    public void undo() {
+        // find the last move
+        // remove it
+        // cell state should be marked as empty
+        // clear all the hashmaps in the winning strategies
+
+        if(moves.isEmpty()) {
+            // throw some error
+            return;
+        }
+
+        Move lastMove = moves.get(moves.size() - 1);
+        moves.remove(lastMove);
+
+        Cell cell = lastMove.getCell();
+        cell.setCellState(CellState.EMPTY);
+        cell.setPlayer(null);
+
+        // chaning the values in the hashmap
+        for(WinningStrategy winningStrategy: winningStrategies) {
+            winningStrategy.handleUndo(board, lastMove);
+        }
+
+        // undo the next Player move index as well
+        nextPlayerMoveIndex -= 1;
+        nextPlayerMoveIndex = (nextPlayerMoveIndex + players.size()) % players.size();
+    }
+
     public static Builder getBuilder() {
         return new Builder();
     }

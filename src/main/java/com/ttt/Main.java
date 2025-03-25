@@ -10,6 +10,7 @@ import com.ttt.strategies.winningstrategies.WinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 // this is the client class
 public class Main {
@@ -29,6 +30,7 @@ public class Main {
 
         GameController gameController = new GameController();
         Game game = gameController.startGame(dimension, players, nextPlayerMoveIndex, winningStrategies);
+        Scanner scanner = new Scanner(System.in);
 
 
         while(game.getGameState().equals(GameState.INPROGRESS)) {
@@ -38,6 +40,14 @@ public class Main {
             gameController.printGame(game);
 
             gameController.makeMove(game);
+
+            System.out.println("Do you want to undo ? Enter y/n");
+            String undo = scanner.next();
+
+            if(undo.equalsIgnoreCase("y")) {
+                gameController.undo(game);
+            }
+            continue;
 
         }
 

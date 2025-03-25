@@ -9,4 +9,9 @@ public class RowWinningStrategy implements WinningStrategy{
         // HW
         return false;
     }
+
+    @Override
+    public void handleUndo(Board board, Move move) {
+
+    }
 }
