@@ -38,10 +38,10 @@ public class TicketService {
         if(gate.isEmpty()) {
             // throw some error here
         }
-//        if(gate.get().getGateStatus().equals(GateStatus.CLOSED)) {
-//            // throw a different error
-//        }
-        //ticket.setGate(gate.get());
+        if(gate.get().getGateStatus().equals(GateStatus.CLOSED)) {
+            // throw a different error
+        }
+        ticket.setGate(gate.get());
 
         // Implement get vehicle in repository
 //        Optional<Vehicle> savedVehicle = vehicleRepository.getVehicle()

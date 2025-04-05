@@ -16,4 +16,12 @@ public class GateRepository {
 
         return Optional.empty();
     }
+
+    public Gate findGateById1(long id) {
+        if(gateMap.containsKey(id)) {
+            return gateMap.get(id);
+        }
+
+        return  null;
+    }
 }
