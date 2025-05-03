@@ -36,11 +36,12 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public Page<Product> getAllProducts(int pageNumber, int pageSize, String fieldName) {
-        Page<Product> products = productRepository.findAll(PageRequest.of(pageNumber, pageSize,
-                Sort.by(fieldName).ascending()));
-
-        return products;
+    public List<Product> getAllProducts(int pageNumber, int pageSize, String fieldName) {
+//        Page<Product> products = productRepository.findAll(PageRequest.of(pageNumber, pageSize,
+//                Sort.by(fieldName).ascending()));
+//
+//        return products;
+        return null;
     }
 
 

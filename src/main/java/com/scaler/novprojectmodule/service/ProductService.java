@@ -9,7 +9,7 @@ import java.util.List;
 public interface ProductService {
     Product getSingleProduct(long id) throws ProductNotFoundException;
 
-    Page<Product> getAllProducts(int pageNumber, int pageSize, String fieldName);
+    List<Product> getAllProducts(int pageNumber, int pageSize, String fieldName);
 
     Product createProduct(Long id, String title, String description, Double price, String category);
 }

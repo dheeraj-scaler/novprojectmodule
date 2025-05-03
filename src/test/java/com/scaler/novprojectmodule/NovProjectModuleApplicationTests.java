@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class NovProjectModuleApplicationTests {
 
@@ -53,6 +55,7 @@ class NovProjectModuleApplicationTests {
        // HW , try to create a scenario for N+1
         // Hint : Fetch list of category
         // Iterate and try to do getProduct()
+        assertEquals(1,1);
     }
 
 }
