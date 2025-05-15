@@ -1,13 +1,18 @@
 package com.scaler.novprojectmodule.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scaler.novprojectmodule.dto.ErrorDto;
+import com.scaler.novprojectmodule.dto.SendEmailDto;
 import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import com.scaler.novprojectmodule.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +27,10 @@ public class ProductController {
     // 2. get a product
     // 3. update a product
     // 4. delete a product
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private ProductService productService;
     List<Product> products = new ArrayList<>();
@@ -72,7 +81,29 @@ public class ProductController {
 
 
 
+    @PostMapping("/email")
+    public ResponseEntity<String> sendEmail(@RequestBody SendEmailDto sendEmailDto) {
+        System.out.println(sendEmailDto.getFrom());
+        String message = "Email sent";
+        ResponseEntity<String> response = new ResponseEntity<>(
+                message, HttpStatus.OK
+        );
 
+
+        try {
+            kafkaTemplate.send(
+                    "sendEmail",
+                    objectMapper.writeValueAsString(sendEmailDto)
+            );
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return response;
+    }
 
 
 }
+
+//serialize the information
+//deserilaize the info
