@@ -1,6 +1,7 @@
 package com.scaler.novprojectmodule.service;
 
 import com.scaler.novprojectmodule.dto.FakeStoreProductDto;
+import com.scaler.novprojectmodule.dto.UserDto;
 import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import org.springframework.data.domain.Page;
@@ -33,25 +34,30 @@ public class FakeStoreProductService implements ProductService{
 
         // First part is : assume it as table name
         // Second part : key of the product
-        Product redisProduct = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCTS_"+id);
+//        Product redisProduct = (Product) redisTemplate.opsForHash().get("PRODUCTS", "PRODUCTS_"+id);
+//
+//        if(redisProduct != null) {
+//            // cache hit
+//            System.out.println("Inside redis");
+//            return redisProduct;
+//        }
 
-        if(redisProduct != null) {
-            // cache hit
-            System.out.println("Inside redis");
-            return redisProduct;
-        }
+//        FakeStoreProductDto fakeStoreProductDto =
+//                 restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
+//                FakeStoreProductDto.class);
+//
+//        if(fakeStoreProductDto == null) {
+//            throw new ProductNotFoundException("Product not found with id "+id);
+//        }
+//
+//        redisTemplate.opsForHash().put("PRODUCTS", "PRODUCTS_"+id, fakeStoreProductDto.getProduct());
+//
+//        return fakeStoreProductDto.getProduct();
 
-        FakeStoreProductDto fakeStoreProductDto =
-                 restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
-                FakeStoreProductDto.class);
+        UserDto userDto = restTemplate.getForObject("http://USERSERVICE/user", UserDto.class);
+        System.out.println(userDto.toString());
 
-        if(fakeStoreProductDto == null) {
-            throw new ProductNotFoundException("Product not found with id "+id);
-        }
-
-        redisTemplate.opsForHash().put("PRODUCTS", "PRODUCTS_"+id, fakeStoreProductDto.getProduct());
-
-        return fakeStoreProductDto.getProduct();
+        return null;
     }
 
     @Override

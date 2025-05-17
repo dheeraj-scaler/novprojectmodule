@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scaler.novprojectmodule.dto.ErrorDto;
 import com.scaler.novprojectmodule.dto.SendEmailDto;
+import com.scaler.novprojectmodule.dto.UserDto;
 import com.scaler.novprojectmodule.exceptions.ProductNotFoundException;
 import com.scaler.novprojectmodule.models.Product;
 import com.scaler.novprojectmodule.service.ProductService;
